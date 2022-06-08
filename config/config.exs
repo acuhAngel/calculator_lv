@@ -11,7 +11,7 @@ import Config
 config :calculator_lv, CalculatorLvWeb.Endpoint,
   url: [host: "localhost"],
   render_errors: [view: CalculatorLvWeb.ErrorView, accepts: ~w(html json), layout: false],
-  pubsub_server: CalculatorLv.PubSub,
+  pubsub_server: [name: CalculatorLv.PubSub, adapter: Phoenix.PubSub.PG2],
   live_view: [signing_salt: "MZ79zwJF"]
 
 # Configures the mailer
