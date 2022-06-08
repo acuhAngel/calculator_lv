@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>calculadora</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="assets/calculadora.css">
+</head>
+
+<body>
+
+  <main id="container">
+
+
+
+
+    <div id="menu">
+      <h3>calc</h3>
+
+      <div id="theme">
+        <p>Theme</p>
+
+        <div class="container">
+          <div class="selectortag">
+            1 2 3
+          </div>
+
+          <div class="selector">
+
+            <div id="select1">
+              <a href="#select1">--</a>
+            </div>
+
+            <div id="select2">
+              <a href="#select2">--</a>
+            </div>
+
+            <div id="select3">
+              <a href="#select3">--</a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="display">
+      <%= @display %>
+    </div>
+
+
+
+    <section>
+      <div class="thumbnail">
+        <input type="button" value="1" phx-click="calc" phx-value-number="1">
+      </div>
+      <div class="thumbnail">
+        <input type="button" value="2" phx-click="calc" phx-value-number="2">
+      </div>
+      <div class="thumbnail">
+        <input type="button" value="3" phx-click="calc" phx-value-number="3">
+      </div>
+      <div class="thumbnail">
+        <input type="button" value="4" phx-click="calc" phx-value-number="4">
+      </div>
+      <div class="thumbnail">
+        <input type="button" value="5" phx-click="calc" phx-value-number="5">
+      </div>
+      <div class="thumbnail">
+        <input type="button" value="6" phx-click="calc" phx-value-number="6">
+      </div>
+      <div class="thumbnail">
+        <input type="button" value="7" phx-click="calc" phx-value-number="7">
+      </div>
+      <div class="thumbnail">
+        <input type="button" value="8" phx-click="calc" phx-value-number="8">
+      </div>
+      <div class="thumbnail">
+        <input type="button" value="9" phx-click="calc" phx-value-number="9">
+      </div>
+      <div class="thumbnail">
+        <input type="button" value="0" phx-click="calc" phx-value-number="0">
+      </div>
+      <div class="thumbnail">
+        <input type="button" value="+" phx-click="calc" phx-value-number="+">
+
+      </div>
+      <div class="thumbnail">
+        <input type="button" value="-" phx-click="calc" phx-value-number="-">
+      </div>
+      <div class="thumbnail">
+        <input type="button" value="x" phx-click="calc" phx-value-number="x">
+
+      </div>
+      <div class="thumbnail">
+        <input type="button" value="/" phx-click="calc" phx-value-number="/">
+
+      </div>
+      <div class="thumbnail">
+        <input type="button" value="DEL" phx-click="calc" phx-value-number="del">
+      </div>
+      <div class="thumbnail">
+        <input type="button" value="RESET" phx-click="calc" phx-value-number="reset">
+      </div>
+      <div class="thumbnail">
+        <input type="button" value="=" phx-click="calc" phx-value-number="eq">
+
+      </div>
+      <div class="thumbnail">
+        <input type="button" value="." phx-click="calc" phx-value-number="1">
+
+      </div>
+    </section>
+
+
+
+
+  </main>
+</body>
+
+</html>
