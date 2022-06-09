@@ -12,7 +12,7 @@ config :calculator_lv, CalculatorLvWeb.Endpoint,
   url: [host: "localhost"],
   render_errors: [view: CalculatorLvWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: CalculatorLv.PubSub,
-  live_view: [signing_salt: "MZ79zwJF"]
+  live_view: [signing_salt: "Srs/Viwm"]
 
 # Configures the mailer
 #
