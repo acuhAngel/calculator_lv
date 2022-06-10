@@ -1,18 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>calculadora</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="assets/calculadora.css">
-</head>
-
 <body>
 
   <main id="container">
@@ -51,69 +36,69 @@
     </div>
 
     <div id="display">
-      <%= @disp %>
+      <%= @display %>
     </div>
 
 
 
     <section>
       <div class="thumbnail">
-        <input type="button" value="1" phx-click="calc" phx-value-number="1">
+        <input type="button" value="1" phx-click="number" phx-value-number="1">
       </div>
       <div class="thumbnail">
-        <input type="button" value="2" phx-click="calc" phx-value-number="2">
+        <input type="button" value="2" phx-click="number" phx-value-number="2">
       </div>
       <div class="thumbnail">
-        <input type="button" value="3" phx-click="calc" phx-value-number="3">
+        <input type="button" value="3" phx-click="number" phx-value-number="3">
       </div>
       <div class="thumbnail">
-        <input type="button" value="4" phx-click="calc" phx-value-number="4">
+        <input type="button" value="4" phx-click="number" phx-value-number="4">
       </div>
       <div class="thumbnail">
-        <input type="button" value="5" phx-click="calc" phx-value-number="5">
+        <input type="button" value="5" phx-click="number" phx-value-number="5">
       </div>
       <div class="thumbnail">
-        <input type="button" value="6" phx-click="calc" phx-value-number="6">
+        <input type="button" value="6" phx-click="number" phx-value-number="6">
       </div>
       <div class="thumbnail">
-        <input type="button" value="7" phx-click="calc" phx-value-number="7">
+        <input type="button" value="7" phx-click="number" phx-value-number="7">
       </div>
       <div class="thumbnail">
-        <input type="button" value="8" phx-click="calc" phx-value-number="8">
+        <input type="button" value="8" phx-click="number" phx-value-number="8">
       </div>
       <div class="thumbnail">
-        <input type="button" value="9" phx-click="calc" phx-value-number="9">
+        <input type="button" value="9" phx-click="number" phx-value-number="9">
       </div>
       <div class="thumbnail">
-        <input type="button" value="0" phx-click="calc" phx-value-number="0">
+        <input type="button" value="0" phx-click="number" phx-value-number="0">
       </div>
       <div class="thumbnail">
-        <input type="button" value="+" phx-click="calc" phx-value-number="+">
+        <input type="button" value="+" phx-click="calc" phx-value-operator="+">
 
       </div>
       <div class="thumbnail">
-        <input type="button" value="-" phx-click="calc" phx-value-number="-">
+        <input type="button" value="-" phx-click="calc" phx-value-operator="-">
       </div>
       <div class="thumbnail">
-        <input type="button" value="x" phx-click="calc" phx-value-number="x">
+        <input type="button" value="x" phx-click="calc" phx-value-operator="x">
 
       </div>
       <div class="thumbnail">
-        <input type="button" value="/" phx-click="calc" phx-value-number="/">
+        <input type="button" value="/" phx-click="calc" phx-value-operator="/">
 
       </div>
       <div class="thumbnail">
-        <input type="button" value="DEL" phx-click="calc" phx-value-number="del">
+        <input type="button" value="DEL" phx-click="del">
       </div>
       <div class="thumbnail">
-        <input type="button" value="RESET" phx-click="calc" phx-value-number="reset">
+        <input type="button" value="RESET" phx-click="reset">
       </div>
       <div class="thumbnail">
-        <input type="button" value="=" phx-click="calc" phx-value-number="eq">
+        <input type="button" value="=" phx-click="solve">
 
       </div>
       <div class="thumbnail">
-        <input type="button" value="." phx-click="calc" phx-value-number="1">
+        <input type="button" value="." phx-click="number" phx-value-number=".">
 
       </div>
     </section>
@@ -123,5 +108,3 @@
 
   </main>
 </body>
-
-</html>

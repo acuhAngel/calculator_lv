@@ -11,9 +11,9 @@ defmodule CalculatorLvWeb.Calculator do
       :ok,
       assign(
         socket,
-        disp: 0,
-        last: nil,
-        oper: nil
+        display: "",
+        oper: "",
+        total: ""
       )
     }
   end
@@ -21,107 +21,109 @@ defmodule CalculatorLvWeb.Calculator do
   # ***** Renderizado de la pagina html *****
   def render(assigns), do: PageView.render("calculator.html", assigns)
 
-  # ***** funciones de la calculadora  ****
-  # ***** Concatena los numeros ingresados ****
-  def select({numero, _}, n, socket) when is_float(numero) do
-    d = socket.assigns.disp
-
-    %{
-      last: socket.assigns.last,
-      disp: "#{d}#{n}",
-      oper: socket.assigns.oper
-    }
+  def operation("", display, _) do
+    IO.puts("primero")
+    "#{display}"
   end
 
-  # ***** reinicia la memoria
-  def select(_, n, _) when n == "reset" do
-    %{
-      disp: 0,
-      last: nil,
-      oper: nil
-    }
+  def operation(last, "", _) do
+    IO.puts("dar igual sin ingresar un segundo valor")
+    last
   end
 
-  # ***** borrar actual
-  def select(_, n, socket) when n == "del" do
-    %{
-      last: socket.assigns.last,
-      disp: 0,
-      oper: socket.assigns.oper
-    }
-  end
-
-  # ***** al presionar igual realiza la operacion segun el operador previamente ingresado
-  def select(:error, n, socket) when n == "eq" do
-    {l_n, _} = socket.assigns.last |> IO.inspect() |> Float.parse()
-    {curr, _} = socket.assigns.disp |> Float.parse()
-    oper = socket.assigns.oper |> IO.inspect()
+  def operation(last, display, oper) do
+    # |> IO.inspect(label: "primer valor")
+    {f, _} = last |> Float.parse()
+    # oper |> IO.inspect()
+    # |> IO.inspect(label: "segundo valor")
+    {s, _} = display |> Float.parse()
 
     case oper do
-      "+" ->
-        %{
-          last: l_n + curr,
-          disp: "#{l_n + curr}",
-          oper: nil
-        }
-
-      "-" ->
-        %{
-          last: l_n - curr,
-          disp: "#{l_n - curr}",
-          oper: nil
-        }
-
-      "/" ->
-        %{
-          last: l_n / curr,
-          disp: "#{l_n / curr}",
-          oper: nil
-        }
-
-      "x" ->
-        %{
-          last: l_n * curr,
-          disp: "#{l_n * curr}",
-          oper: nil
-        }
-
-      _ ->
-        %{
-          last: "",
-          disp: socket.assigns.display,
-          oper: nil
-        }
+      "+" -> f + s
+      "-" -> f - s
+      "/" -> f / s
+      "x" -> f * s
     end
   end
 
-  # ***** define el tipo de operacion
-  def select(:error, n, socket) do
-    %{
-      last: socket.assigns.disp,
-      disp: 0,
-      oper: n
-    }
-  end
+  def handle_event("number", %{"number" => n}, socket) do
+    display = socket.assigns.display <> n
 
-  def handle_event("calc", %{"number" => n}, socket) do
-    IO.inspect(n)
-    numero = Float.parse(n)
-    x = select(numero, n, socket)
-    CalculatorLvWeb.Endpoint.broadcast_from(self(), @topic, "edit_screen", %{disp: x.disp})
+    CalculatorLvWeb.Endpoint.broadcast_from(self(), @topic, "refresh", %{display: display})
 
     {
       :noreply,
       assign(
         socket,
-        last: x.last,
-        disp: x.disp,
-        oper: x.oper
+        display: "#{display}"
+      )
+    }
+  end
+
+  def handle_event("calc", %{"operator" => oper}, socket) do
+    last = socket.assigns.total |> IO.inspect(label: "valor 1")
+    l_oper = socket.assigns.oper |> IO.inspect()
+    display = socket.assigns.display |> IO.inspect(label: "valor 2")
+    total = operation(last, display, l_oper) |> IO.inspect(label: "resultado")
+
+    {
+      :noreply,
+      assign(
+        socket,
+        display: "",
+        total: "#{total}",
+        oper: oper
+      )
+    }
+  end
+
+  def handle_event("solve", _, socket) do
+    last = socket.assigns.total |> IO.inspect(label: "valor 1")
+    oper = socket.assigns.oper |> IO.inspect()
+    display = socket.assigns.display |> IO.inspect(label: "valor 2")
+
+    total = operation(last, display, oper) |> IO.inspect(label: "resultado")
+
+    CalculatorLvWeb.Endpoint.broadcast_from(self(), @topic, "refresh", %{display: total})
+
+    {
+      :noreply,
+      assign(
+        socket,
+        total: "",
+        display: "#{total}",
+        oper: ""
+      )
+    }
+  end
+
+  def handle_event("reset", _, socket) do
+    CalculatorLvWeb.Endpoint.broadcast_from(self(), @topic, "refresh", %{})
+
+    {
+      :noreply,
+      assign(
+        socket,
+        display: "",
+        total: "",
+        oper: ""
+      )
+    }
+  end
+
+  def handle_event("del", _, socket) do
+    CalculatorLvWeb.Endpoint.broadcast_from(self(), @topic, "refresh", %{})
+
+    {
+      :noreply,
+      assign(
+        socket,
+        display: ""
       )
     }
   end
 
   def handle_info(%{topic: @topic, payload: payload}, socket) do
-    {:noreply, assign(socket, :disp, payload.disp)}
+    {:noreply, assign(socket, :display, payload.display)}
   end
 end
